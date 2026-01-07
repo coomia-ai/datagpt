@@ -1,24 +1,5 @@
 version: '3.8'
 services:
-  ollama-service:
-    build:
-      context: ./ollama-service
-    container_name: ollama-service
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-    environment:
-      - OLLAMA_MODEL_DIR=/root/.ollama/models
-    command: "/app/start.sh"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    networks:
-      - datagpt-network
-
   postgres:
     image: agnohq/pgvector:16
     container_name: postgres
@@ -32,12 +13,6 @@ services:
     networks:
       - datagpt-network
     volumes:
-      - ./postgres/pagila-schema.sql:/docker-entrypoint-initdb.d/1-pagila-schema.sql
-      - ./postgres/pagila-schema-jsonb.sql:/docker-entrypoint-initdb.d/1-pagila-schema-jsonb.sql
-      - ./postgres/pagila-data.sql:/docker-entrypoint-initdb.d/2-pagila-data.sql
-      - ./postgres/restore-pagila-data-jsonb.sh:/docker-entrypoint-initdb.d/3-restore-pagila-data-jsonb.sh
-      - ./postgres/pagila-data-yum-jsonb.backup:/docker-entrypoint-initdb.d/pagila-data-yum-jsonb.backup
-      - ./postgres/pagila-data-apt-jsonb.backup:/docker-entrypoint-initdb.d/pagila-data-apt-jsonb.backup
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
@@ -63,7 +38,6 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-
   ui:
     image: coomia/datagpt-ui:2.0
     container_name: ui
@@ -73,33 +47,6 @@ services:
       - "80:3000"
     networks:
       - datagpt-network
-
-
-  clickhouse:
-      image: clickhouse/clickhouse-server:23.11
-      container_name: clickhouse
-      hostname: clickhouse
-      ports:
-        - "8123:8123"
-        - "9000:9000"
-      environment:
-        CLICKHOUSE_DB: olist
-        CLICKHOUSE_USER: olist
-        CLICKHOUSE_PASSWORD: olist123456
-        CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
-      ulimits:
-        nofile:
-          soft: 262144
-          hard: 262144
-      volumes:
-        - clickhouse_data:/var/lib/clickhouse
-        - clickhouse_logs:/var/log/clickhouse-server
-        - ./clickhouse/data:/var/lib/clickhouse/user_files
-        - ./clickhouse/init/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
-        - ./clickhouse/init/01-create-tables.sql:/docker-entrypoint-initdb.d/01-create-tables.sql:ro
-        - ./clickhouse/init/02-import-data.sql:/docker-entrypoint-initdb.d/02-import-data.sql:ro
-      networks:
-        - datagpt-network
 
   trino:
     image: trinodb/trino:latest
@@ -130,13 +77,58 @@ services:
     restart: always
     networks:
       - datagpt-network
+  
+  ollama-service:
+    build:
+      context: ./ollama-service
+    container_name: ollama-service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_MODEL_DIR=/root/.ollama/models
+    command: "/app/start.sh"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - datagpt-network
+
+  clickhouse:
+      image: clickhouse/clickhouse-server:23.11
+      container_name: clickhouse
+      hostname: clickhouse
+      ports:
+        - "8123:8123"
+        - "9000:9000"
+      environment:
+        CLICKHOUSE_DB: olist
+        CLICKHOUSE_USER: olist
+        CLICKHOUSE_PASSWORD: olist123456
+        CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+      ulimits:
+        nofile:
+          soft: 262144
+          hard: 262144
+      volumes:
+        - clickhouse_data:/var/lib/clickhouse
+        - clickhouse_logs:/var/log/clickhouse-server
+        - ./clickhouse/data:/var/lib/clickhouse/user_files
+        - ./clickhouse/init/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+        - ./clickhouse/init/01-create-tables.sql:/docker-entrypoint-initdb.d/01-create-tables.sql:ro
+        - ./clickhouse/init/02-import-data.sql:/docker-entrypoint-initdb.d/02-import-data.sql:ro
+      networks:
+        - datagpt-network
 
 networks:
   datagpt-network:
 
 volumes:
+  postgres-data:
   redis_data:
   ollama-data:
-  postgres-data:
   clickhouse_data:
   clickhouse_logs:

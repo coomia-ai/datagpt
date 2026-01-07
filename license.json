@@ -1,11 +1,9 @@
 {
-  "license_id": "bfba0de3c6e50174",
+  "license_id": "2d704fc6fd046a46",
   "user": "spancer",
-  "email": "spancer@example.com",
-  "product": "CoomiaAI",
+  "email": "spancer@coomia.com",
+  "product": "DataGPT",
   "type": "TRIAL",
-  "expiry": "2025-11-18",
-  "signature": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlX2lkIjoiYmZiYTBkZTNjNmU1MDE3NCIsInVzZXIiOiJzcGFuY2VyIiwiZW1haWwiOiJzcGFuY2VyQGV4YW1wbGUuY29tIiwicHJvZHVjdCI6IkNvb21pYUFJIiwidHlwZSI6IlRSSUFMIiwiZXhwaXJ5IjoiMjAyNS0xMS0xOCJ9.TjPTaw_5hygYP6waQQDWzkVRLpVPu1lo-3CYCdqh2y8XxF3jeVvGBdRJhAM8164FeREdYGYKrLtNjLfNrJ6JLZECwbBxIxGSVMcuQMfFzOhRBnnc6RkDiCKBBDgKR2cTk-El2KjinbbXtdfEoZQi1P_IzSMhnetN3v3uRu4RaKU7C4hyQv7Um3ZS_Y1d-HLj7CISHEEaZ2DYvo8mquLxObYSyxIIZ0orhtTBAeiY9mM-gXYKKfjOw0MB-scZX3SUUK6RQpb6LWin-QVOJ47NSkqvymNoqovnkgYcvENwgO5OOmko1EktrbQe77yaeMuUm19TgQSmqTqdEcuNJ4xYVg",
-  "created_at": 1762846480,
-  "updated_at": 1762846480
+  "expiry": "2026-01-13",
+  "signature": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlX2lkIjoiMmQ3MDRmYzZmZDA0NmE0NiIsInVzZXIiOiJzcGFuY2VyIiwiZW1haWwiOiJzcGFuY2VyQGNvb21pYS5jb20iLCJwcm9kdWN0IjoiRGF0YUdQVCIsInR5cGUiOiJUUklBTCIsImV4cGlyeSI6IjIwMjYtMDEtMTMifQ.W0nL4Lf1hlUhsLFQqzYOgmNuPbFnGuXw8YaTf5548L1AFl1bzC_teyaC4RPfrsi_GiWXLWoHW_cqb7c0jzzSG9_2OHORFHkaNR4XtXBlDlOis-BBjIwL6e2el3wEilUJA3lhtf7qWT2XwBJoFPXKGn4s-35QCivYnX6p3wprm1LFQ4mNx5utHiUgNaceAr46qrEz90oOy0i6r2qZwZGrrwaEDG2exfpkozzty5etF40_AIjoMDvgJOghzc7Zd_4XmUMkIvtLfrlFLDLGYoO3v7OECRG87OFNFBV_aWDejG23qrA2qN2Pv7slSKjflT3x3Q37cdX9F8bH3EJV9EXmCA"
 }
